@@ -21,8 +21,9 @@ slotArray = [];
 
 class Slot{
 	constructor(correctLetter, slotPositionX, slotPositionY){
-		this.correctLetter = correctLetter; 
-		this.slotLocation = slotLocation;
+		this.correctLetter = correctLetter; 		
+		this.image = new Image(); 
+		this.image.src = "Images/letter-slot2.png"
 		this.slotPosition = {
 			x: slotPositionX,
 			y: slotPositionY
@@ -44,15 +45,15 @@ class SlotHolder{
 				var slotName = "slot" + slotNumber;
 
 				// create SlotPositionX
-				var slotPositionX = slotNumber * slotWidth + 20;
+				var slotPositionX = slotNumber * slotWidth + 50;
 
-				var slotPositionY = 200;
-				correctLetter = this.word[i];
+				var slotPositionY = 330;
+				var correctLetter = this.word[i];
 				//create a position object for each slot
 				var slotName = new Slot(correctLetter, slotPositionX, slotPositionY);
 
 				slotArray.push(slotName)
-				slot++;
+				slotNumber++;
 
 			}
 		}
@@ -60,6 +61,7 @@ class SlotHolder{
 }
 
 var catSlotHolder = new SlotHolder('cat');
+catSlotHolder.createSlots();
 
 var letterArray = []
 
@@ -81,7 +83,9 @@ function update(){
 //create draw function
 function draw(){
 	context.drawImage(backgroundImage, 0, 0)
-	
+	for (var i=0; i < slotArray.length; i++){
+		context.drawImage(slotArray[i].image, slotArray[i].slotPosition.x, slotArray[i].slotPosition.y)
+	}
 	requestAnimationFrame(draw);
 }
 
